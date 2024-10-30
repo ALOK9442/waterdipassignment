@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
+import ReactApexChart from "react-apexcharts";
 
 interface Booking {
   arrival_date_year: string;
@@ -12,16 +11,19 @@ interface Booking {
   babies: string;
   country: string;
 }
+
 function App() {
-  const [count, setCount] = useState(0);
   const [data, setData] = useState<Booking[]>([]);
+  const [chartData, setChartData] = useState<{ visitorsPerDay: number[]; days: string[] }>({
+    visitorsPerDay: [],
+    days: [],
+  });
 
   useEffect(() => {
     fetch("/hotel_bookings_1000.csv")
       .then((response) => response.text())
       .then((text) => {
         const rows = text.split("\n");
-        const header = rows[0].split(",");
         const dataRows = rows.slice(1);
 
         const bookings = dataRows.map((row) => {
@@ -38,16 +40,65 @@ function App() {
           return booking;
         });
 
-        setData(bookings); // Set state with parsed data
+        setData(bookings);
       })
       .catch((error) => console.error("Error loading CSV:", error));
   }, []);
 
   useEffect(() => {
-    console.log(data);
+    const visitorsPerDay: Record<string, number> = {};
+
+    data.forEach((booking) => {
+      const day = booking.arrival_date_day_of_month;
+      const totalVisitors =
+        parseInt(booking.adults) +
+        parseInt(booking.children) +
+        parseInt(booking.babies);
+
+      if (visitorsPerDay[day]) {
+        visitorsPerDay[day] += totalVisitors;
+      } else {
+        visitorsPerDay[day] = totalVisitors;
+      }
+    });
+
+    const days = Object.keys(visitorsPerDay).sort((a, b) => Number(a) - Number(b));
+    const visitors = days.map((day) => visitorsPerDay[day]);
+
+    setChartData({ visitorsPerDay: visitors, days });
   }, [data]);
 
-  return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
+  const options = {
+    chart: {
+      id: "visitor-chart",
+    },
+    xaxis: {
+      categories: chartData.days,
+      title: {
+        text: "Day of the Month",
+      },
+    },
+    yaxis: {
+      title: {
+        text: "Total Visitors",
+      },
+    },
+    title: {
+      text: "Hotel Visitors per Day",
+      align: "center" as "center",
+    },
+  };
+  
+
+  return (
+    <ReactApexChart
+      options={options}
+      series={[{ name: "Visitors", data: chartData.visitorsPerDay }]}
+      type="area"
+      height={350}
+      width={350}
+    />
+  );
 }
 
 export default App;
