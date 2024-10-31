@@ -1,26 +1,10 @@
 import { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
+import { Booking } from "../types/types";
+import { ChartProps as TimeChartProps } from "../types/types";
 
-interface Booking {
-  arrival_date_year: string;
-  arrival_date_month: string;
-  arrival_date_day_of_month: string;
-  adults: string;
-  children: string;
-  babies: string;
-  country: string;
-}
-
-interface TimeChartProps {
-  startDate: string;
-  endDate: string;
-}
-
-export default function TimeChart({
-  startDate,
-  endDate,
-}: TimeChartProps) {
+export default function TimeChart({ startDate, endDate }: TimeChartProps) {
   const [data, setData] = useState<Booking[]>([]);
   const [chartData, setChartData] = useState<{
     visitorsPerDay: number[];
@@ -58,7 +42,8 @@ export default function TimeChart({
 
   useEffect(() => {
     const visitorsPerDay: Record<string, number> = {};
-
+    const bookingData = JSON.parse(localStorage.getItem("booking") || "[]");
+    console.log(bookingData);
     const filteredData = data.filter((booking) => {
       const bookingDate = new Date(
         `${booking.arrival_date_year}-${booking.arrival_date_month}-${booking.arrival_date_day_of_month}`
@@ -83,7 +68,7 @@ export default function TimeChart({
 
       visitorsPerDay[day] = (visitorsPerDay[day] || 0) + totalVisitors;
     });
-    console.log(visitorsPerDay);
+    // console.log(visitorsPerDay);
     const days = Object.keys(visitorsPerDay).sort(
       (a, b) => new Date(a).getTime() - new Date(b).getTime()
     );
