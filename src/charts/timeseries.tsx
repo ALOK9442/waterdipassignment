@@ -64,6 +64,7 @@ export default function TimeChart({
     chart: {
       type: "area",
       stacked: false,
+      background: "#f4f4f4",
       height: 500,
       zoom: {
         type: "x",

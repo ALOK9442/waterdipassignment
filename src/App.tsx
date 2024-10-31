@@ -12,7 +12,8 @@ function App() {
   const [endDate, setEndDate] = useState<string>("2015-07-09");
   const booking: Booking[] = useBookings();
   return (
-    <div className="w-full bg-white">
+    <div className="w-full bg-gray-400">
+      <h1 className="text-2xl font-bold p-4">Hotel Booking Data</h1>
       <DateInput
         startDate={startDate}
         setStartDate={setStartDate}

@@ -60,6 +60,10 @@ export default function CountryVisitorsChart({
     chart: {
       type: "bar",
       height: 300,
+      zoom: {
+        enabled: true,
+      },
+      background: "#f4f4f4",
     },
     plotOptions: {
       bar: {
@@ -93,7 +97,6 @@ export default function CountryVisitorsChart({
         options={columnChartOptions}
         series={columnChartOptions.series}
         type="bar"
-        height="100%"
       />
     </div>
   );
