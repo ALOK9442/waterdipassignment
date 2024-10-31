@@ -89,50 +89,17 @@ export default function SparklineCharts({
   });
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-around",
-        marginTop: "30px",
-        gap: "30px",
-      }}
-    >
-      <div
-        style={{
-          textAlign: "center",
-          padding: "15px",
-          border: "1px solid #ccc",
-          borderRadius: "8px",
-          width: "250px",
-        }}
-      >
-        <h4
-          style={{ marginBottom: "10px", fontSize: "16px", fontWeight: "bold" }}
-        >
-          Total Adults
-        </h4>
+    <div className="flex justify-around mt-8 gap-8">
+      <div className="text-center p-4 border border-gray-300 rounded-lg">
+        <h4 className="mb-2 text-lg font-bold">Total Adults</h4>
         <ReactApexChart
           options={sparklineOptions("Adults", totalAdults, adultVisitorData)}
           series={[{ data: adultVisitorData }]}
           type="line"
-          height={120}
-          width={220}
         />
       </div>
-      <div
-        style={{
-          textAlign: "center",
-          padding: "15px",
-          border: "1px solid #ccc",
-          borderRadius: "8px",
-          width: "250px",
-        }}
-      >
-        <h4
-          style={{ marginBottom: "10px", fontSize: "16px", fontWeight: "bold" }}
-        >
-          Total Children
-        </h4>
+      <div className="text-center p-4 border border-gray-300 rounded-lg">
+        <h4 className="mb-2 text-lg font-bold">Total Children</h4>
         <ReactApexChart
           options={sparklineOptions(
             "Children",

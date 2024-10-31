@@ -13,3 +13,10 @@ export interface ChartProps {
   endDate: string;
   booking: Booking[];
 }
+
+export interface DateInputProps {
+  startDate: string;
+  setStartDate: (value: string) => void;
+  endDate: string;
+  setEndDate: (value: string) => void;
+}

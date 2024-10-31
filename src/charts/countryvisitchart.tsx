@@ -77,7 +77,7 @@ export default function CountryVisitorsChart({
     xaxis: {
       categories: countryData.countries,
       title: {
-        text: "Country",
+        text: "Countries",
       },
     },
     yaxis: {
@@ -93,6 +93,7 @@ export default function CountryVisitorsChart({
         options={columnChartOptions}
         series={columnChartOptions.series}
         type="bar"
+        height="100%"
       />
     </div>
   );
