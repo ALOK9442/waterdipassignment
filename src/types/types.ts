@@ -11,4 +11,5 @@ export interface Booking {
 export interface ChartProps {
   startDate: string;
   endDate: string;
+  booking: Booking[];
 }

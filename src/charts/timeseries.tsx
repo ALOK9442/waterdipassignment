@@ -4,8 +4,11 @@ import { ApexOptions } from "apexcharts";
 import { Booking } from "../types/types";
 import { ChartProps as TimeChartProps } from "../types/types";
 
-export default function TimeChart({ startDate, endDate }: TimeChartProps) {
-  const [data, setData] = useState<Booking[]>([]);
+export default function TimeChart({
+  startDate,
+  endDate,
+  booking,
+}: TimeChartProps) {
   const [chartData, setChartData] = useState<{
     visitorsPerDay: number[];
     days: string[];
@@ -15,36 +18,10 @@ export default function TimeChart({ startDate, endDate }: TimeChartProps) {
   });
 
   useEffect(() => {
-    fetch("/hotel_bookings_1000.csv")
-      .then((response) => response.text())
-      .then((text) => {
-        const rows = text.split("\n");
-        const dataRows = rows.slice(1).filter((row) => row.trim() !== "");
-
-        const bookings = dataRows.map((row) => {
-          const values = row.split(",").map((value) => value.trim());
-          const booking: Booking = {
-            arrival_date_year: values[1],
-            arrival_date_month: values[2],
-            arrival_date_day_of_month: values[3],
-            adults: values[4],
-            children: values[5],
-            babies: values[6],
-            country: values[7],
-          };
-          return booking;
-        });
-
-        setData(bookings);
-      })
-      .catch((error) => console.error("Error loading CSV:", error));
-  }, []);
-
-  useEffect(() => {
     const visitorsPerDay: Record<string, number> = {};
-    const bookingData = JSON.parse(localStorage.getItem("booking") || "[]");
+    const bookingData: Booking[] = booking;
     console.log(bookingData);
-    const filteredData = data.filter((booking) => {
+    const filteredData = bookingData.filter((booking) => {
       const bookingDate = new Date(
         `${booking.arrival_date_year}-${booking.arrival_date_month}-${booking.arrival_date_day_of_month}`
       );
@@ -75,7 +52,7 @@ export default function TimeChart({ startDate, endDate }: TimeChartProps) {
     const visitors = days.map((day) => visitorsPerDay[day]);
 
     setChartData({ visitorsPerDay: visitors, days });
-  }, [data, startDate, endDate]);
+  }, [booking, startDate, endDate]);
 
   const options: ApexOptions = {
     series: [
@@ -149,8 +126,6 @@ export default function TimeChart({ startDate, endDate }: TimeChartProps) {
         options={options}
         series={[{ name: "Visitors", data: chartData.visitorsPerDay }]}
         type="area"
-        height={500}
-        width={500}
       />
     </div>
   );

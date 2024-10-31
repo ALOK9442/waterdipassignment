@@ -7,6 +7,7 @@ import { ChartProps as CountryVisitorsChartProps } from "../types/types";
 export default function CountryVisitorsChart({
   startDate,
   endDate,
+  booking,
 }: CountryVisitorsChartProps) {
   const [countryData, setCountryData] = useState<{
     countries: string[];
@@ -17,8 +18,7 @@ export default function CountryVisitorsChart({
   });
 
   useEffect(() => {
-    const storedData = localStorage.getItem("booking");
-    const bookings: Booking[] = storedData ? JSON.parse(storedData) : [];
+    const bookings: Booking[] = booking;
 
     const visitorsPerCountry: Record<string, number> = {};
 
@@ -48,7 +48,7 @@ export default function CountryVisitorsChart({
       (country) => visitorsPerCountry[country]
     );
     setCountryData({ countries, visitors: countryVisitors });
-  }, [startDate, endDate]);
+  }, [startDate, endDate, booking]);
 
   const columnChartOptions: ApexOptions = {
     series: [
@@ -93,7 +93,6 @@ export default function CountryVisitorsChart({
         options={columnChartOptions}
         series={columnChartOptions.series}
         type="bar"
-        height={300}
       />
     </div>
   );
