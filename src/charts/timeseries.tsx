@@ -127,8 +127,7 @@ export default function TimeChart({
         options={options}
         series={[{ name: "Visitors", data: chartData.visitorsPerDay }]}
         type="area"
-        height="100%"
-        className="shadow-lg"
+        className="shadow-lg bg-[#f4f4f4] border-gray-300 rounded-lg"
       />
     </div>
   );

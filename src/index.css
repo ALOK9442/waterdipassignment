@@ -6,4 +6,5 @@ body {
   background-color: #eff4f7;
   margin: 0;
   padding: 0;
+  background: linear-gradient(90deg, #646cff 33%, #fff 33%);
 }

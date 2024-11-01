@@ -98,8 +98,7 @@ export default function CountryVisitorsChart({
         options={columnChartOptions}
         series={columnChartOptions.series}
         type="bar"
-        height="100%"
-        className="shadow-lg border-gray-300 rounded-lg"
+        className="shadow-lg bg-[#f4f4f4] border-gray-300 rounded-lg"
       />
   );
 }

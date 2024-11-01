@@ -3,6 +3,8 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  /* two color in background 1/3 purple then white */
+  /* background: linear-gradient(90deg, #646cff 33%, #fff 33%); */
 }
 
 .logo {
