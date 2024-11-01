@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import TimeChart from "./charts/timeseries";
+import TimeChart from "./charts/visitorsperdaychart";
 import { Booking } from "./types/types";
 import CountryVisitorsChart from "./charts/countryvisitchart";
 import SparklineCharts from "./charts/sparklinechart";
