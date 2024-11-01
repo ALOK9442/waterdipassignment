@@ -90,8 +90,8 @@ export default function SparklineCharts({
   });
 
   return (
-    <div className="flex justify-around mt-8 gap-8">
-      <div className="text-center p-4 border border-gray-300 rounded-lg bg-[#f4f4f4]">
+    <div className="flex justify-around mt-8">
+      <div className="text-center p-4 border border-gray-300 rounded-lg bg-[#f4f4f4] sm:w-2/5 shadow-lg">
         <h4 className="mb-2 text-lg font-bold">Total Adults</h4>
         <ReactApexChart
           options={sparklineOptions("Adults", totalAdults, adultVisitorData)}
@@ -99,7 +99,7 @@ export default function SparklineCharts({
           type="line"
         />
       </div>
-      <div className="text-center p-4 border border-gray-300 rounded-lg bg-[#f4f4f4]">
+      <div className="text-center p-4 border border-gray-300 rounded-lg bg-[#f4f4f4] sm:w-2/5 shadow-lg">
         <h4 className="mb-2 text-lg font-bold">Total Children</h4>
         <ReactApexChart
           options={sparklineOptions(

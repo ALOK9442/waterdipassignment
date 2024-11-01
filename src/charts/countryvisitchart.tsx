@@ -64,6 +64,7 @@ export default function CountryVisitorsChart({
         enabled: true,
       },
       background: "#f4f4f4",
+      
     },
     plotOptions: {
       bar: {
@@ -89,15 +90,16 @@ export default function CountryVisitorsChart({
         text: "Number of Visitors",
       },
     },
+  
   };
 
   return (
-    <div>
       <ReactApexChart
         options={columnChartOptions}
         series={columnChartOptions.series}
         type="bar"
+        height="100%"
+        className="shadow-lg border-gray-300 rounded-lg"
       />
-    </div>
   );
 }

@@ -7,7 +7,7 @@ export default function DateInput({
   setEndDate,
 }: DateInputProps) {
   return (
-    <div className="flex sm:flex-row flex-col sm:gap-6 gap-2 border-2 w-fit p-2 h-full justify-center items-center bg-gray-300 ml-2 sm:ml-8">
+    <div className="flex sm:flex-row flex-col sm:gap-6 gap-2 border-2 w-fit p-2 h-full justify-center items-center bg-gray-300 ml-2 shadow-lg sm:ml-8">
       <label className="flex items-center">
         Start Date:
         <input
