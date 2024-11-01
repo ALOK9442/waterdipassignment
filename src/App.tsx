@@ -6,6 +6,7 @@ import CountryVisitorsChart from "./charts/countryvisitchart";
 import SparklineCharts from "./charts/sparklinechart";
 import { useBookings } from "./customhook/usebookings";
 import DateInput from "./components/dateinput";
+import Header from "./components/header";
 
 function App() {
   const [startDate, setStartDate] = useState<string>("2015-06-30");
@@ -13,7 +14,8 @@ function App() {
   const booking: Booking[] = useBookings();
   return (
     <div className="w-full bg-gray-400">
-      <h1 className="text-2xl font-bold p-4">Hotel Booking Data</h1>
+      <Header />
+      <h4 className="flex ml-4">Change dates to view more data</h4>
       <DateInput
         startDate={startDate}
         setStartDate={setStartDate}
